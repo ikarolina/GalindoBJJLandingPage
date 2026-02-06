@@ -3,11 +3,30 @@ import equipeImg from "./assets/imagens/equipe.jpeg";
 import kimonoImg from "./assets/imagens/kimono.jpeg";
 import moletomImg from "./assets/imagens/moletom.jpeg";
 import camisaImg from "./assets/imagens/camiseta.jpeg";
-import logoImg from "./assets/imagens/logo.jpg"; 
+import logoImg from "./assets/imagens/logo.jpg";
+import mestreGalindoImg from "./assets/imagens/mestre-galindo.jpeg";
+import treiningKids from "./assets/imagens/treino-criancas.jpeg";
+import treiningKidsJpg from "./assets/imagens/treino-kids.jpeg";
+import treiningInitiateImg from "./assets/imagens/treino-adulto-iniciante.jpeg";
+import treiningAdvancedImg from "./assets/imagens/treino-adulto-avancado-intermediario.jpeg";
+
 import { motion } from "framer-motion";
+import { FaWhatsapp } from "react-icons/fa";
+
 import {
-  MessageCircle, ExternalLink, Instagram, Mail, Phone, MapPin, ShoppingBag,
-  Zap, ShieldHalf, Dumbbell, Target, ChevronDown, Loader2, Menu, X, ArrowRight
+  ExternalLink,
+  Instagram,
+  Mail,
+  Phone,
+  MapPin,
+  ShoppingBag,
+  Zap,
+  ShieldHalf,
+  Dumbbell,
+  Target,
+  ChevronDown,
+  Menu,
+  X,
 } from "lucide-react";
 
 // -----------------------------------------------------------------------------
@@ -63,7 +82,7 @@ const data = {
        },
        {
          nome: "Ana Paula",
-         texto: "Como mulher, me sinto muito segura e acolhida. As aulas femininas mudaram minha vida.",
+         texto: "Como mulher, me sinto muito segura e acolhida. As aulas mudaram minha vida.",
          idade: "28 anos",
        },
        {
@@ -95,13 +114,39 @@ const data = {
          },
          { 
            pergunta: "O que levar para a primeira aula?", 
-           resposta: "Apenas roupa confortável (bermuda e camiseta). O kimono para a aula experimental é fornecido pela academia." 
+           resposta: "Apenas roupa confortável (bermuda e camiseta)." 
          },
          { 
              pergunta: "Vocês oferecem aulas particulares?", 
              resposta: "Sim! Oferecemos aulas particulares flexíveis, ideais para acelerar seu aprendizado e focar em técnicas específicas." 
            },
-       ]
+       ],
+     horarios: [
+       {
+         time: "17:30 às 18:30",
+         modalidade: "👦 Kids 1",
+         icon: "🕔",
+         image: treiningKids,
+       },
+       {
+         time: "18:30 às 19:30",
+         modalidade: "👧 Kids 2",
+         icon: "🕡",
+         image: treiningKidsJpg,
+       },
+       {
+         time: "19:30 às 20:30",
+         modalidade: "🥋 Modo Iniciante",
+         icon: "🕢",
+         image: treiningInitiateImg,
+       },
+       {
+         time: "20:30 às 21:30",
+         modalidade: "🔥 Modo Intermediário e Avançado",
+         icon: "🕣",
+         image: treiningAdvancedImg,
+       },
+     ]
    };
 
 // -----------------------------------------------------------------------------
@@ -110,84 +155,235 @@ const data = {
 
 export default function GalindoLandingPremium() {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const contactRef = useRef(null); 
+
+  const scrollToSection = (id) => {
+    setIsNavOpen(false);
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   // Função para rolar até o Contato
   const scrollToContact = () => {
-    setIsNavOpen(false); 
+    setIsNavOpen(false);
     if (contactRef.current) {
       contactRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
-  // -----------------------------------------------------------------------------
-  // Componentes de Layout e Seções
-  // -----------------------------------------------------------------------------
-
   const Navbar = () => (
-    <header className="sticky top-0 z-50 w-full bg-zinc-950/90 backdrop-blur-sm border-b border-zinc-800">
+    <header
+      className={cn(
+        "sticky top-0 z-50 w-full bg-zinc-950/90 backdrop-blur-md border-b border-zinc-800 transition-all duration-300",
+        isScrolled && "shadow-xl bg-zinc-950/95"
+      )}
+    >
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Logo */}
-        <div className="flex items-center space-x-3">
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            className="flex items-center"
-          >
-            {/* NOVO: Usando a imagem da Logo */}
-            <img 
-                src={logoImg} 
-                alt="Logo Galindo Jiu-Jitsu" 
-                className="h-10 md:h-12 w-auto" 
+        
+        {/* Logo - Corrigido */}
+        <motion.div
+          initial={{ opacity: 0, y: -5 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="flex items-center gap-2 cursor-pointer"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
+          <div className="flex items-center justify-center w-10 h-10 rounded-full overflow-hidden bg-white p-1">
+            <img
+              src={logoImg}
+              alt="Logo Galindo Jiu-Jitsu"
+              className="h-full w-auto object-contain"
             />
-          </motion.div>
-          {/* Mantive o texto da marca como extra, mas você pode remover se o logo já for completo */}
-          <span className="text-xl md:text-2xl font-bold text-red-600 tracking-tight hidden sm:block">
-            Galindo Jiu-Jitsu
-          </span>
-        </div>
+          </div>
+          
+          <div className="flex flex-col leading-tight">
+            <span className="text-base md:text-lg font-bold text-red-600 tracking-tight">
+              Galindo
+            </span>
+            <span className="text-xs text-zinc-300 font-medium tracking-wide">
+              Jiu-Jitsu
+            </span>
+          </div>
+        </motion.div>
 
-        {/* Desktop CTAs */}
-        <nav className="hidden md:flex items-center space-x-4">
-          <Button variant="outline" size="sm" onClick={scrollToContact}>
-            Agende Experimental
-          </Button>
-          <a href={data.WHATSAPP_LINK} target="_blank" rel="noreferrer">
-            <Button variant="default" size="sm" className="flex items-center gap-2">
-              <MessageCircle className="w-4 h-4" />
-              WhatsApp
-            </Button>
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-8">
+          <a
+            onClick={() => scrollToSection("treinamento")}
+            className={cn(
+              "cursor-pointer text-sm font-medium text-zinc-300 hover:text-white transition",
+              activeSection === "treinamento" && "text-red-600"
+            )}
+          >
+            Treinamento
+          </a>
+
+          <a
+            onClick={() => scrollToSection("depoimentos")}
+            className={cn(
+              "cursor-pointer text-sm font-medium text-zinc-300 hover:text-white transition",
+              activeSection === "depoimentos" && "text-red-600"
+            )}
+          >
+            Depoimentos
+          </a>
+
+          <a
+            onClick={() => scrollToSection("horarios")}
+            className={cn(
+              "cursor-pointer text-sm font-medium text-zinc-300 hover:text-white transition",
+              activeSection === "horarios" && "text-red-600"
+            )}
+          >
+            Horários
+          </a>
+
+          <a
+            onClick={() => scrollToSection("contato")}
+            className={cn(
+              "cursor-pointer text-sm font-medium text-zinc-300 hover:text-white transition",
+              activeSection === "contato" && "text-red-600"
+            )}
+          >
+            Contato
           </a>
         </nav>
 
-        {/* Mobile Menu Button */}
-        <Button variant="outline" size="icon" className="md:hidden" onClick={() => setIsNavOpen(!isNavOpen)}>
+        {/* CTAs */}
+        <div className="hidden md:flex items-center gap-3">
+          <Button size="sm" onClick={scrollToContact} className="flex items-center gap-2">
+            <Zap className="w-4 h-4" />
+            Aula Experimental
+          </Button>
+
+          <a
+            href={data.WHATSAPP_LINK}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="WhatsApp"
+            className="flex items-center"
+          >
+            <motion.div 
+              className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center shadow-lg hover:shadow-green-500/30 transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaWhatsapp className="w-5 h-5 text-white" />
+            </motion.div>
+          </a>
+        </div>
+
+        {/* Mobile Button */}
+        <Button
+          variant="outline"
+          className="md:hidden"
+          onClick={() => setIsNavOpen(!isNavOpen)}
+          aria-label="Abrir menu"
+        >
           {isNavOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </Button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Corrigir logo também */}
       <motion.div
         initial={false}
-        animate={{ height: isNavOpen ? "auto" : 0 }}
-        transition={{ duration: 0.3 }}
-        className="overflow-hidden md:hidden border-t border-zinc-800"
+        animate={{ opacity: isNavOpen ? 1 : 0 }}
+        transition={{ duration: 0.2 }}
+        className={cn(
+          "md:hidden fixed inset-0 z-50 bg-zinc-950/95 backdrop-blur-md p-6",
+          !isNavOpen && "pointer-events-none"
+        )}
       >
-        <div className="flex flex-col p-4 space-y-3">
-          <Button variant="default" onClick={scrollToContact} className="w-full">
-            Quero minha Aula Experimental
-          </Button>
-          <a href={data.WHATSAPP_LINK} target="_blank" rel="noreferrer">
-            <Button variant="outline" className="w-full flex items-center gap-2">
-                <MessageCircle className="w-4 h-4" />
-                Falar no WhatsApp
+        <div className="flex flex-col h-full">
+          <div className="flex items-center justify-between mb-6">
+            <div 
+              className="flex items-center gap-3 cursor-pointer"
+              onClick={() => {
+                setIsNavOpen(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
+              <div className="w-10 h-10 rounded-full overflow-hidden bg-white p-1">
+                <img src={logoImg} alt="Logo Galindo" className="h-full w-auto object-contain" />
+              </div>
+              <div className="flex flex-col leading-tight">
+                <span className="text-white font-bold">Galindo</span>
+                <span className="text-zinc-400 text-sm">Jiu-Jitsu</span>
+              </div>
+            </div>
+
+            <Button variant="outline" onClick={() => setIsNavOpen(false)}>
+              <X className="h-5 w-5" />
             </Button>
-          </a>
+          </div>
+
+          <div className="flex-1 flex flex-col justify-center gap-6">
+            <Button size="lg" onClick={scrollToContact}>
+              Agendar Aula Experimental
+            </Button>
+
+            <a href={data.WHATSAPP_LINK} target="_blank" rel="noreferrer">
+              <Button size="lg" variant="outline" className="w-full flex items-center justify-center gap-3">
+                <FaWhatsapp className="w-5 h-5 text-green-500" />
+                Falar no WhatsApp
+              </Button>
+            </a>
+
+            <nav className="flex flex-col items-center gap-4 pt-6">
+              <button onClick={() => scrollToSection("treinamento")} className="text-white text-lg">
+                Treinamento
+              </button>
+              <button onClick={() => scrollToSection("depoimentos")} className="text-white text-lg">
+                Depoimentos
+              </button>
+              <button onClick={() => scrollToSection("horarios")} className="text-white text-lg">
+                Horários
+              </button>
+              <button onClick={() => scrollToSection("contato")} className="text-white text-lg">
+                Contato
+              </button>
+            </nav>
+          </div>
+
+          <p className="text-zinc-500 text-sm text-center">
+            © {new Date().getFullYear()} Galindo Jiu-Jitsu
+          </p>
         </div>
       </motion.div>
     </header>
   );
+
+  // Efeito de scroll para encolher o header e adicionar sombra
+  useEffect(() => {
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Scroll-spy para marcar a seção ativa
+  useEffect(() => {
+    const sections = ['treinamento', 'depoimentos', 'horarios', 'contato'];
+    const observers = [];
+
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) setActiveSection(id);
+        });
+      }, { root: null, rootMargin: '-40% 0px -40% 0px', threshold: 0 });
+      obs.observe(el);
+      observers.push(obs);
+    });
+
+    return () => observers.forEach(o => o.disconnect());
+  }, []);
 
   const HeroSection = () => (
     <motion.header 
@@ -264,24 +460,22 @@ export default function GalindoLandingPremium() {
             transition={{ duration: 0.6 }}
           >
             <p className="text-red-600 font-semibold uppercase mb-2">Nossa História</p>
-            <h2 className="text-4xl font-extrabold text-white mb-6">
-              O Legado da Equipe Galindo
-            </h2>
-            <p className="text-zinc-400 text-lg leading-relaxed mb-6">
-              Desde **2012**, a Equipe Galindo Jiu-Jitsu é sinônimo de dedicação, excelência técnica e formação humana. 
-              Sob a liderança do **Professor Galindo**, desenvolvemos atletas e cidadãos, com metodologia 
-              comprovada e um ambiente familiar, seguro e acolhedor.
-            </p>
-            <ul className="text-zinc-300 text-lg space-y-2 list-none">
-              <li className="flex items-center"><ChevronDown className="w-4 h-4 mr-3 text-red-600 rotate-[-90deg]" /> Treinos para todas as idades e níveis.</li>
-              <li className="flex items-center"><ChevronDown className="w-4 h-4 mr-3 text-red-600 rotate-[-90deg]" /> Foco em desenvolvimento pessoal e técnico.</li>
-              <li className="flex items-center"><ChevronDown className="w-4 h-4 mr-3 text-red-600 rotate-[-90deg]" /> Ambiente que promove respeito e união.</li>
-            </ul>
-            <div className="mt-8">
-                <Button variant="default" onClick={scrollToContact}>
-                    Agendar minha Visita
-                </Button>
-            </div>
+              <p className="text-red-600 font-semibold uppercase mb-2">Quem somos</p>
+              <h2 className="text-4xl font-extrabold text-white mb-6">
+                Equipe Galindo Jiu-Jitsu
+              </h2>
+              <p className="text-zinc-400 text-lg leading-relaxed mb-4">
+                Desde 2012, a Equipe Galindo Jiu-Jitsu é sinônimo de trabalho sério, dedicação e paixão pelo esporte. Fundada para formar campeões dentro e fora do tatame, nossa prioridade é transformar vidas por meio da disciplina, respeito e superação.
+              </p>
+              <p className="text-zinc-400 text-lg leading-relaxed mb-4">
+                Sob a liderança do Professor Galindo, construímos uma trajetória sólida, reunindo atletas e alunos de todas as idades em um ambiente motivador e focado em resultados. Aqui você treina com metodologia comprovada, instrutores qualificados e atenção individual para sua evolução.
+              </p>
+              <p className="text-zinc-300 text-lg font-semibold mt-4">Equipe Galindo Jiu-Jitsu — mais do que uma equipe, uma família.</p>
+              <div className="mt-8">
+                  <Button variant="default" onClick={scrollToContact}>
+                      Agende sua aula experimental
+                  </Button>
+              </div>
           </motion.div>
 
           {/* Imagem com Efeito Visual Acentuado */}
@@ -290,12 +484,12 @@ export default function GalindoLandingPremium() {
             whileInView={{ x: 0, opacity: 1 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="rounded-2xl overflow-hidden shadow-2xl shadow-red-600/10 bg-zinc-900 h-80 relative"
+            className="rounded-2xl overflow-hidden shadow-2xl shadow-red-600/10 bg-zinc-900 h-screen max-h-96 relative"
         >
             <img
-                src={equipeImg}
-                alt="Professor Galindo e Equipe"
-                className="w-full h-full object-cover z-10 hover:scale-105 transition-transform duration-500"
+                src={mestreGalindoImg}
+                alt="Mestre Galindo"
+                className="w-full h-full object-contain z-10 hover:scale-105 transition-transform duration-500"
             />
         </motion.div>
         </div>
@@ -304,7 +498,7 @@ export default function GalindoLandingPremium() {
   );
 
   const BenefitsSection = () => (
-    <section className="py-24 bg-zinc-900">
+    <section id="treinamento" className="py-24 bg-zinc-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl text-center">
         <p className="text-red-600 font-semibold uppercase mb-2">Valores</p>
         <h2 className="text-4xl font-extrabold text-white mb-12">
@@ -350,7 +544,7 @@ export default function GalindoLandingPremium() {
   );
 
   const TestimonialsSection = () => (
-    <section className="py-24 bg-zinc-950">
+    <section id="depoimentos" className="py-24 bg-zinc-950">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl text-center">
         <p className="text-red-600 font-semibold uppercase mb-2">Comunidade</p>
         <h2 className="text-4xl font-extrabold text-white mb-12">
@@ -367,7 +561,7 @@ export default function GalindoLandingPremium() {
               className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 text-left shadow-2xl relative"
             >
               {/* Citação Acentuada */}
-              <p className="text-5xl text-red-600 opacity-20 absolute top-4 left-4 font-serif">“</p>
+              <p className="text-5xl text-red-600 opacity-20 absolute top-4 left-4 font-serif">"</p>
               <div className="relative pt-6">
                 <p className="text-zinc-300 italic text-lg leading-relaxed mb-6">
                   "{d.texto}"
@@ -441,6 +635,72 @@ export default function GalindoLandingPremium() {
   };
 
 
+  const ScheduleSection = () => (
+    <section id="horarios" className="py-24 bg-zinc-950">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl text-center">
+        <p className="text-red-600 font-semibold uppercase mb-2">📅 Horários de Aulas</p>
+        <h2 className="text-4xl font-extrabold text-white mb-12">
+          Escolha Seu Melhor Horário
+        </h2>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {data.horarios.map((h, i) => (
+            <motion.div
+              key={i}
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="bg-zinc-900 rounded-xl overflow-hidden shadow-lg border border-zinc-800 hover:border-red-600 transition-all duration-300 group h-full flex flex-col"
+            >
+              {/* Imagem */}
+              <div className="h-48 overflow-hidden bg-zinc-800">
+                <img
+                  src={h.image}
+                  alt={h.modalidade}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+              
+              {/* Conteúdo */}
+              <div className="p-6 flex flex-col flex-grow">
+                <div className="text-4xl mb-3">{h.icon}</div>
+                <h3 className="text-2xl font-bold text-red-600 mb-3">{h.time}</h3>
+                <p className="text-white font-semibold text-lg flex-grow">
+                  {h.modalidade}
+                </p>
+                
+                <Button 
+                  variant="default" 
+                  size="sm" 
+                  className="w-full mt-4"
+                  onClick={scrollToContact}
+                >
+                  Agendar Aula
+                </Button>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="mt-12 p-6 bg-red-600/10 border border-red-600/30 rounded-xl"
+        >
+          <p className="text-zinc-300 text-lg">
+            <span className="text-red-600 font-bold">⏰ Segunda a Sexta:</span> Aulas conforme horários acima
+            <br />
+            <span className="text-red-600 font-bold">📍 Local:</span> Rua Andorinha, 164 - Sala 02, Caieiras/SP
+          </p>
+        </motion.div>
+      </div>
+    </section>
+  );
+
+
   const PrivateLessonsSection = () => (
     <section className="py-24 bg-zinc-950">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl text-center">
@@ -504,12 +764,14 @@ const StoreSection = () => {
   return (
     <section className="py-20 bg-zinc-900">
       <div className="container mx-auto px-4">
-        <p className="text-red-600 font-semibold uppercase text-center mb-2">Equipamentos</p>
-        <h2 className="text-4xl font-extrabold text-white text-center mb-12">
-            Vista a <span className="text-red-600">Garra</span> da Galindo
+        <p className="text-red-600 font-semibold uppercase text-center mb-2">Vestuário</p>
+        <h2 className="text-4xl font-extrabold text-white text-center mb-6">
+            Leve o orgulho da Equipe Galindo
         </h2>
+        <p className="text-zinc-400 text-center max-w-2xl mx-auto mb-8">
+          Na Galindo Store você encontra produtos oficiais: kimonos, camisetas, moletons, bonés e acessórios desenvolvidos com qualidade e identidade da nossa equipe. Cada peça foi pensada para conforto e estilo — vista Galindo e represente nossa história.
+        </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-4xl mx-auto"> 
-          {/* Max-width e mx-auto para centralizar e dar respiro */}
           {data.produtos.map((produto, i) => (
             <motion.div
               key={produto.id}
@@ -520,7 +782,6 @@ const StoreSection = () => {
               className="bg-zinc-950 rounded-xl overflow-hidden shadow-lg hover:shadow-red-600/10 transition-shadow duration-300 border border-zinc-800"
               whileHover={{ y: -5 }}
             >
-              {/* Altura da imagem reduzida de h-64 para h-56 */}
               <div className="h-56 overflow-hidden"> 
                 <img
                     src={produto.img}
@@ -529,11 +790,9 @@ const StoreSection = () => {
                 />
               </div>
               <div className="p-4 text-center"> 
-                {/* Padding reduzido de p-5 para p-4 */}
                 <h3 className="text-xl font-semibold text-white mb-2">{produto.nome}</h3>
                 <p className="text-zinc-400 mb-3 text-sm">{produto.desc}</p>
-                <div className="flex justify-between items-center pt-2">
-                    <span className="text-red-600 font-extrabold text-xl">{produto.preco}</span>
+                <div className="flex justify-center pt-2">
                     <a href={data.WHATSAPP_LINK + `?text=Quero%20comprar%20o%20produto:%20${produto.nome}`} target="_blank" rel="noreferrer">
                         <Button size="sm" className="flex items-center gap-1">
                             <ShoppingBag className="w-4 h-4" /> Comprar
@@ -611,7 +870,7 @@ const StoreSection = () => {
   );
 
   const ContactSection = () => (
-    <section ref={contactRef} className="py-24 bg-zinc-950">
+    <section ref={contactRef} id="contato" className="py-24 bg-zinc-950">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         <p className="text-red-600 font-semibold uppercase text-center mb-2">Localização</p>
         <h2 className="text-4xl font-extrabold text-white text-center mb-12">
@@ -627,25 +886,32 @@ const StoreSection = () => {
           >
             <div className="flex items-start">
               <MapPin className="w-6 h-6 mr-4 text-red-600 flex-shrink-0 mt-1" />
-              <p className="text-lg font-semibold">
-                Rua Andorinha, 164 - Sala 02, Caieiras/SP
-                <br />
-                <span className="text-zinc-500 font-normal text-sm">Próximo ao Ginásio Municipal.</span>
-              </p>
+                      <p className="text-lg font-semibold">
+                        Rua Andorinha, 164, Laranjeiras, Caieiras/SP
+                        <br />
+                        <span className="text-zinc-500 font-normal text-sm">Próximo ao Ginásio Municipal.</span>
+                      </p>
             </div>
             <div className="flex items-center">
               <Phone className="w-6 h-6 mr-4 text-red-600" />
-              <p className="text-lg font-semibold">(11) 9 6921-4329 (WhatsApp)</p>
+                      <p className="text-lg font-semibold">(11) 9 6921-4329</p>
             </div>
             <div className="flex items-center">
               <Mail className="w-6 h-6 mr-4 text-red-600" />
-              <p className="text-lg font-semibold">equipegalindojiujitsu@yahoo.com</p>
+                      <p className="text-lg font-semibold">equipegalindojiujitsu@yahoo.com</p>
             </div>
-            <a href="https://www.instagram.com/equipe_galindo/" target="_blank" rel="noreferrer" className="flex items-center hover:text-red-600 transition-colors">
-              <Instagram className="w-6 h-6 mr-4 text-red-600" />
-              <p className="text-lg font-semibold">@equipe_galindo</p>
-              <ExternalLink className="w-4 h-4 ml-2 text-zinc-500" />
-            </a>
+                    <div className="flex items-center space-x-4">
+                      <a href="https://www.instagram.com/equipe_galindo/" target="_blank" rel="noreferrer" className="flex items-center hover:text-red-600 transition-colors">
+                        <Instagram className="w-6 h-6 mr-3 text-red-600" />
+                        <p className="text-lg font-semibold">@equipe_galindo</p>
+                      </a>
+                      <div className="flex items-center text-zinc-400">
+                        <p className="text-sm">Facebook: Equipe Galindo Jiu Jitsu</p>
+                      </div>
+                      <div className="flex items-center text-zinc-400">
+                        <p className="text-sm">YouTube: @EquipeGalindoJiuJitsu</p>
+                      </div>
+                    </div>
 
             <div className="pt-6 space-y-3">
                 <a href={data.WHATSAPP_LINK} target="_blank" rel="noreferrer">
@@ -695,14 +961,25 @@ const StoreSection = () => {
       href={data.WHATSAPP_LINK}
       target="_blank"
       rel="noreferrer"
-      className="fixed bottom-6 right-6 z-50 p-4 rounded-full bg-green-500 text-white shadow-2xl shadow-green-500/50 hover:bg-green-600 transition-all duration-300"
+      className="fixed bottom-6 right-6 z-50 flex flex-col items-center group"
       initial={{ scale: 0 }}
       animate={{ scale: 1 }}
       transition={{ type: "spring", stiffness: 200, damping: 10, delay: 1 }}
-      whileHover={{ scale: 1.1 }}
+      whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.9 }}
     >
-      <MessageCircle className="w-6 h-6" />
+      {/* Tooltip */}
+      <div className="mb-2 bg-green-600 text-white text-xs font-semibold py-1 px-3 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap shadow-lg">
+        Fale conosco!
+      </div>
+      
+      {/* Botão principal */}
+      <div className="relative p-4 rounded-full bg-gradient-to-br from-green-500 to-green-600 text-white shadow-2xl shadow-green-500/50 hover:shadow-green-500/70 transition-all duration-300">
+        <FaWhatsapp className="w-7 h-7" />
+        
+        {/* Anel animado */}
+        <div className="absolute inset-0 rounded-full border-2 border-green-400 animate-ping opacity-20"></div>
+      </div>
     </motion.a>
   );
 
@@ -734,6 +1011,7 @@ const StoreSection = () => {
         <BenefitsSection />
         <ModalitiesSection /> 
         <TestimonialsSection />
+        <ScheduleSection />
         <PrivateLessonsSection /> 
         <StoreSection /> {/* Produtos com tamanho ajustado */}
         <FAQSection />
