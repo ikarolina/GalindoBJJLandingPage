@@ -480,20 +480,29 @@ export default function GalindoLandingPremium() {
             </div>
           </motion.div>
 
-          {/* Imagem com Efeito Visual Acentuado */}
-          <motion.div
-            initial={{ x: 30, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="order-1 md:order-2 rounded-xl lg:rounded-2xl overflow-hidden shadow-xl lg:shadow-2xl shadow-red-600/10 bg-zinc-900 h-64 sm:h-80 md:h-96 lg:h-[28rem] relative mb-6 md:mb-0"
-          >
-            <img
-              src={mestreGalindoImg}
-              alt="Mestre Galindo"
-              className="w-full h-full object-cover z-10 hover:scale-105 transition-transform duration-500"
-            />
-          </motion.div>
+   {/* Imagem do Mestre Galindo - Opção 3: Com altura automática */}
+        <motion.div
+          initial={{ x: 30, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="order-1 md:order-2 flex items-center justify-center"
+        >
+          <div className="relative w-full max-w-md mx-auto">
+            <div className="rounded-xl lg:rounded-2xl overflow-hidden shadow-xl lg:shadow-2xl shadow-red-600/10 bg-zinc-900">
+              <img
+                src={mestreGalindoImg}
+                alt="Mestre Galindo"
+                className="w-full h-auto max-h-[500px] object-contain"
+              />
+            </div>
+            
+            {/* Badge decorativo */}
+            <div className="absolute -bottom-2 -right-2 bg-red-600 text-white text-sm font-bold px-4 py-2 rounded-lg rotate-3 shadow-lg">
+              🥋 Mestre Galindo
+            </div>
+          </div>
+        </motion.div>
         </div>
       </div>
     </section>
