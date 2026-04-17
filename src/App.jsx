@@ -69,7 +69,7 @@ const data = {
        { id: 4, nome: "Viseira Galindo", img: viseiradImg },
        { id: 5, nome: "Boné Galindo", img: boneImg },
        { id: 6, nome: "Bermuda Galindo", img: bermudadImg },
-       { id: 7, nome: "Bolsa Galindo", preco: "R$ 89", desc: "Malha 100% algodão.", img: sacoImg },
+       { id: 7, nome: "Bolsa Galindo", img: sacoImg },
      ],
      depoimentos: [
        {
