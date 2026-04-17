@@ -1,15 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
 import equipeImg from "./assets/imagens/equipe.jpeg";
 import kimonoImg from "./assets/imagens/kimono.jpeg";
-import moletomImg from "./assets/imagens/moletom.jpeg";
 import camisaImg from "./assets/imagens/camiseta.jpeg";
+import rashGuardImg from "./assets/imagens/rash-guard.jpeg";
+import boneImg from "./assets/imagens/bone.jpeg";
+import bermudadImg from "./assets/imagens/bermuda.jpeg";
+import sacoImg from "./assets/imagens/saco.jpeg";
+import viseiradImg from "./assets/imagens/viseira.jpeg";
 import logoImg from "./assets/imagens/logo.jpg";
 import mestreGalindoImg from "./assets/imagens/mestre-galindo.jpeg";
-import treiningKids from "./assets/imagens/treino-criancas.jpeg";
-import treiningKidsJpg from "./assets/imagens/treino-kids.jpeg";
-import treiningInitiateImg from "./assets/imagens/treino-adulto-iniciante.jpeg";
-import treiningAdvancedImg from "./assets/imagens/treino-adulto-avancado-intermediario.jpeg";
-
+import treiningBabyClassImg from "./assets/imagens/baby-class.jpeg";
+import treiningKids1Img from "./assets/imagens/kids-1.jpeg";
+import treiningKids2Img from "./assets/imagens/kids-2.jpeg";
+import treiningAdultosInicianteImg from "./assets/imagens/adultos-iniciante.jpeg";
 import { motion } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
 
@@ -52,16 +55,6 @@ const Button = ({ children, className, variant = "default", size = "default", ..
     sm: "h-9 px-3 text-sm",
     lg: "h-12 px-8 text-base",
   };
-
-  return (
-    <motion.button
-      className={cn(baseClasses, variantClasses[variant], sizeClasses[size], className)}
-      whileTap={{ scale: 0.98 }}
-      {...props}
-    >
-      {children}
-    </motion.button>
-  );
 };
 
 // -----------------------------------------------------------------------------
@@ -70,9 +63,13 @@ const Button = ({ children, className, variant = "default", size = "default", ..
 const data = {
     WHATSAPP_LINK: "https://wa.me/5511969214329?text=Olá%20Galindo!%20Quero%20uma%20aula%20experimental",
     produtos: [
-       { id: 1, nome: "Kimono Oficial", preco: "R$ 399", desc: "Corte Competition - Aprovado CBJJ.", img: kimonoImg },
-       { id: 2, nome: "Camiseta Galindo", preco: "R$ 89", desc: "Malha 100% algodão.", img: camisaImg },
-       { id: 3, nome: "Moletom Premium", preco: "R$ 199", desc: "Forro felpado premium.", img: moletomImg },
+       { id: 1, nome: "Kimono Oficial", img: kimonoImg },
+       { id: 2, nome: "Camiseta Galindo", img: camisaImg },
+       { id: 3, nome: "Rash Guard Galindo", img: rashGuardImg },
+       { id: 4, nome: "Viseira Galindo", img: viseiradImg },
+       { id: 5, nome: "Boné Galindo", img: boneImg },
+       { id: 6, nome: "Bermuda Galindo", img: bermudadImg },
+       { id: 7, nome: "Bolsa Galindo", preco: "R$ 89", desc: "Malha 100% algodão.", img: sacoImg },
      ],
      depoimentos: [
        {
@@ -121,32 +118,38 @@ const data = {
              resposta: "Sim! Oferecemos aulas particulares flexíveis, ideais para acelerar seu aprendizado e focar em técnicas específicas." 
            },
        ],
-     horarios: [
-       {
-         time: "17:30 às 18:30",
-         modalidade: "👦 Kids 1",
-         icon: "🕔",
-         image: treiningKids,
-       },
-       {
-         time: "18:30 às 19:30",
-         modalidade: "👧 Kids 2",
-         icon: "🕡",
-         image: treiningKidsJpg,
-       },
-       {
-         time: "19:30 às 20:30",
-         modalidade: "🥋 Modo Iniciante",
-         icon: "🕢",
-         image: treiningInitiateImg,
-       },
-       {
-         time: "20:30 às 21:30",
-         modalidade: "🔥 Modo Intermediário e Avançado",
-         icon: "🕣",
-         image: treiningAdvancedImg,
-       },
-     ]
+ horarios: [
+  {
+    modalidade: "👶 Baby Class",
+    descricao: "Para crianças iniciantes com foco em coordenação e disciplina.",
+    icon: "🕔",
+    image: treiningBabyClassImg,
+  },
+  {
+    modalidade: "👦 Kids 1",
+    descricao: "Desenvolvimento técnico e motor para crianças.",
+    icon: "🕔",
+    image: treiningKids1Img,
+  },
+  {
+    modalidade: "👧 Kids 2",
+    descricao: "Evolução técnica com disciplina e confiança.",
+    icon: "🕡",
+    image: treiningKids2Img,
+  },
+  {
+    modalidade: "🥋 Adulto Iniciante",
+    descricao: "Para quem nunca treinou ou está começando no Jiu-Jitsu.",
+    icon: "🕢",
+    image: treiningAdultosInicianteImg,
+  },
+  {
+    modalidade: "🔥 Adulto Intermediário/Avançado",
+    descricao: "Treino intenso para evolução técnica e competição.",
+    icon: "🕣",
+    image: treiningAdultosInicianteImg,
+  },
+]
    };
 
 // -----------------------------------------------------------------------------
@@ -176,8 +179,8 @@ export default function GalindoLandingPremium() {
   const Navbar = () => (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full bg-zinc-950/90 backdrop-blur-md border-b border-zinc-800 transition-all duration-300",
-        isScrolled && "shadow-xl bg-zinc-950/95"
+        "sticky top-0 z-50 w-full bg-zinc-950/95 backdrop-blur-lg border-b border-zinc-800/50 transition-all duration-500",
+        isScrolled && "bg-zinc-950/98 shadow-2xl shadow-yellow-600/10 border-yellow-600/20"
       )}
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -187,22 +190,22 @@ export default function GalindoLandingPremium() {
           initial={{ opacity: 0, y: -5 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="flex items-center gap-2 cursor-pointer"
+          className="flex items-center gap-3 cursor-pointer group"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          <div className="flex items-center justify-center w-10 h-10 rounded-full overflow-hidden bg-white p-1">
+          <div className="flex items-center justify-center w-14 h-14 rounded-[1.1rem] overflow-hidden bg-gradient-to-br from-zinc-200 to-zinc-300 p-2 shadow-2xl shadow-black/20 group-hover:shadow-yellow-600/30 transition-shadow duration-300">
             <img
               src={logoImg}
               alt="Logo Galindo Jiu-Jitsu"
-              className="h-full w-auto object-contain"
+              className="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-300"
             />
           </div>
           
           <div className="flex flex-col leading-tight">
-            <span className="text-base md:text-lg font-bold text-red-600 tracking-tight">
+            <span className="text-base md:text-xl font-bold text-yellow-600 tracking-tight group-hover:text-yellow-500 transition-colors duration-300">
               Galindo
             </span>
-            <span className="hidden xs:inline text-xs text-zinc-300 font-medium tracking-wide">
+            <span className="hidden sm:inline text-sm text-zinc-300 font-medium tracking-wide group-hover:text-zinc-200 transition-colors duration-300">
               Jiu-Jitsu
             </span>
           </div>
@@ -213,74 +216,74 @@ export default function GalindoLandingPremium() {
           <a
             onClick={() => scrollToSection("treinamento")}
             className={cn(
-              "cursor-pointer text-sm font-medium text-zinc-300 hover:text-white transition whitespace-nowrap",
-              activeSection === "treinamento" && "text-red-600"
+              "cursor-pointer text-sm font-medium text-zinc-300 hover:text-yellow-600 transition-all duration-300 whitespace-nowrap relative group",
+              activeSection === "treinamento" && "text-yellow-600"
             )}
           >
             Treinamento
+            <span className={cn(
+              "absolute -bottom-1 left-0 w-0 h-0.5 bg-yellow-600 transition-all duration-300 group-hover:w-full",
+              activeSection === "treinamento" && "w-full"
+            )} />
           </a>
 
           <a
             onClick={() => scrollToSection("depoimentos")}
             className={cn(
-              "cursor-pointer text-sm font-medium text-zinc-300 hover:text-white transition whitespace-nowrap",
-              activeSection === "depoimentos" && "text-red-600"
+              "cursor-pointer text-sm font-medium text-zinc-300 hover:text-yellow-600 transition-all duration-300 whitespace-nowrap relative group",
+              activeSection === "depoimentos" && "text-yellow-600"
             )}
           >
             Depoimentos
+            <span className={cn(
+              "absolute -bottom-1 left-0 w-0 h-0.5 bg-yellow-600 transition-all duration-300 group-hover:w-full",
+              activeSection === "depoimentos" && "w-full"
+            )} />
           </a>
 
           <a
             onClick={() => scrollToSection("horarios")}
             className={cn(
-              "cursor-pointer text-sm font-medium text-zinc-300 hover:text-white transition whitespace-nowrap",
-              activeSection === "horarios" && "text-red-600"
+              "cursor-pointer text-sm font-medium text-zinc-300 hover:text-yellow-600 transition-all duration-300 whitespace-nowrap relative group",
+              activeSection === "horarios" && "text-yellow-600"
             )}
           >
             Horários
+            <span className={cn(
+              "absolute -bottom-1 left-0 w-0 h-0.5 bg-yellow-600 transition-all duration-300 group-hover:w-full",
+              activeSection === "horarios" && "w-full"
+            )} />
           </a>
 
           <a
             onClick={() => scrollToSection("contato")}
             className={cn(
-              "cursor-pointer text-sm font-medium text-zinc-300 hover:text-white transition whitespace-nowrap",
-              activeSection === "contato" && "text-red-600"
+              "cursor-pointer text-sm font-medium text-zinc-300 hover:text-yellow-600 transition-all duration-300 whitespace-nowrap relative group",
+              activeSection === "contato" && "text-yellow-600"
             )}
           >
             Contato
+            <span className={cn(
+              "absolute -bottom-1 left-0 w-0 h-0.5 bg-yellow-600 transition-all duration-300 group-hover:w-full",
+              activeSection === "contato" && "w-full"
+            )} />
           </a>
         </nav>
 
         {/* CTAs */}
         <div className="hidden md:flex items-center gap-2 lg:gap-3">
-          <Button size="sm" onClick={scrollToContact} className="flex items-center gap-2 whitespace-nowrap">
+          <Button size="sm" onClick={scrollToContact} className="flex items-center gap-2 whitespace-nowrap shadow-lg shadow-red-600/20 hover:shadow-red-600/40 transition-shadow duration-300">
             <Zap className="w-4 h-4" />
             <span className="hidden lg:inline">Aula Experimental</span>
             <span className="lg:hidden">Aula</span>
           </Button>
-
-          <a
-            href={data.WHATSAPP_LINK}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="WhatsApp"
-            className="flex items-center"
-          >
-            <motion.div 
-              className="w-9 h-9 lg:w-10 lg:h-10 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center shadow-lg hover:shadow-green-500/30 transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FaWhatsapp className="w-4 h-4 lg:w-5 lg:h-5 text-white" />
-            </motion.div>
-          </a>
         </div>
 
         {/* Mobile Button */}
         <Button
           variant="outline"
           size="sm"
-          className="md:hidden p-2"
+          className="md:hidden p-2 border-zinc-700 hover:border-red-600 transition-colors duration-300"
           onClick={() => setIsNavOpen(!isNavOpen)}
           aria-label="Abrir menu"
         >
@@ -395,11 +398,13 @@ export default function GalindoLandingPremium() {
         className="relative min-h-[90vh] sm:h-[95vh] flex items-center overflow-hidden bg-zinc-950 pt-16"
     >
       {/* Background Effect: Dark Red Gradient + Simulated Texture/Image */}
-      <div className="absolute inset-0 bg-cover bg-center opacity-30" style={{
-        backgroundImage: 'linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.5)), url("https://placehold.co/1200x800/18181b/dc2626?text=Tatame")',
-        backgroundPosition: 'center 60%',
+      <div className="absolute inset-0 bg-cover bg-center opacity-95" style={{
+        backgroundImage: `linear-gradient(rgba(10,12,18,0.92), rgba(15,23,42,0.65)), url(${equipeImg})`,
+        backgroundPosition: 'center 50%',
         backgroundSize: 'cover',
       }} />
+
+      <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/95 via-zinc-950/75 to-zinc-950/95" />
 
       {/* Content Container */}
       <div className="container mx-auto relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl py-12 sm:py-0">
@@ -407,7 +412,7 @@ export default function GalindoLandingPremium() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.5 }}
-            className="text-red-500 font-bold uppercase tracking-widest mb-4 text-xs sm:text-sm"
+            className="text-red-700 font-bold uppercase tracking-widest mb-4 text-xs sm:text-sm"
         >
             Desde 2012 Formando Campeões
         </motion.p>
@@ -415,17 +420,17 @@ export default function GalindoLandingPremium() {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="text-white text-3xl xs:text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-4 sm:mb-6 leading-tight"
+          className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-4 sm:mb-6 leading-tight"
         >
-          Transforme sua Vida com o <span className="text-red-600">Jiu-Jitsu</span>
+          Transforme sua Vida com o <span className="bg-gradient-to-r from-yellow-600 via-red-500 to-red-600 bg-clip-text text-transparent">Jiu-Jitsu</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.5 }}
-          className="text-zinc-300 text-base sm:text-lg lg:text-xl mb-6 sm:mb-8 lg:mb-10 max-w-2xl mx-auto px-2"
+          className="text-zinc-200 text-base sm:text-lg lg:text-xl mb-6 sm:mb-8 lg:mb-10 max-w-2xl mx-auto px-2"
         >
-          Aulas para <strong>iniciantes</strong>, femininas, kids e competidores. Sua jornada de <strong>disciplina</strong>, foco e força começa aqui.
+          Aulas para <strong className="text-yellow-600">iniciantes</strong>, femininas, kids e competidores. Sua jornada de <strong className="text-yellow-600">disciplina</strong>, foco e força começa aqui.
         </motion.p>
 
         {/* CTA Group */}
@@ -435,17 +440,32 @@ export default function GalindoLandingPremium() {
           transition={{ delay: 0.6, duration: 0.5, type: "spring", stiffness: 100 }}
           className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-2"
         >
-          <Button size="lg" onClick={scrollToContact} className="w-full sm:w-auto">
+          <Button size="lg" onClick={scrollToContact} className="w-full sm:w-auto bg-gradient-to-r from-yellow-500 via-red-500 to-red-600 text-zinc-950 shadow-2xl shadow-yellow-500/30 hover:shadow-yellow-500/40 transition-all duration-300">
             <Zap className="w-5 h-5 mr-2" />
-            <span className="text-sm sm:text-base">Faça uma aula experimental GRÁTIS</span>
+            <span className="text-sm sm:text-base font-semibold">Faça uma aula experimental GRÁTIS</span>
           </Button>
           <a href={data.WHATSAPP_LINK} target="_blank" rel="noreferrer" className="w-full sm:w-auto">
-            <Button size="lg" variant="outline" className="w-full sm:w-auto hover:bg-red-600/10">
+            <Button size="lg" variant="outline" className="w-full sm:w-auto text-yellow-600 border border-yellow-600 hover:bg-yellow-600/10 hover:text-yellow-500">
               <Phone className="w-5 h-5 mr-2" />
               <span className="text-sm sm:text-base">Falar com Equipe Galindo</span>
             </Button>
           </a>
         </motion.div>
+
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 text-sm sm:text-base text-zinc-200">
+          <div className="inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-900/70 px-4 py-2 shadow-sm shadow-black/20">
+            <span className="text-yellow-600">🥋</span>
+            Mais de 10 turmas semanais
+          </div>
+          <div className="inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-900/70 px-4 py-2 shadow-sm shadow-black/20">
+            <span className="text-yellow-600">👨‍👩‍👧‍👦</span>
+            Aulas para todas as idades
+          </div>
+          <div className="inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-900/70 px-4 py-2 shadow-sm shadow-black/20">
+            <span className="text-yellow-600">🏆</span>
+            Preparação para competição
+          </div>
+        </div>
       </div>
     </motion.header>
   );
@@ -499,7 +519,7 @@ export default function GalindoLandingPremium() {
             
             {/* Badge decorativo */}
             <div className="absolute -bottom-2 -right-2 bg-red-600 text-white text-sm font-bold px-4 py-2 rounded-lg rotate-3 shadow-lg">
-              🥋 Mestre Galindo
+              🥋 Professor Galindo
             </div>
           </div>
         </motion.div>
@@ -643,70 +663,115 @@ export default function GalindoLandingPremium() {
     );
   };
 
-  const ScheduleSection = () => (
-    <section id="horarios" className="py-12 sm:py-16 lg:py-24 bg-zinc-950">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl text-center">
-        <p className="text-red-600 font-semibold uppercase mb-2 text-sm sm:text-base">📅 Horários de Aulas</p>
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-8 lg:mb-12">
-          Escolha Seu Melhor Horário
-        </h2>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {data.horarios.map((h, i) => (
-            <motion.div
-              key={i}
-              initial={{ y: 20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-zinc-900 rounded-xl overflow-hidden shadow-lg border border-zinc-800 hover:border-red-600 transition-all duration-300 group h-full flex flex-col"
-            >
-              {/* Imagem */}
-              <div className="h-40 sm:h-48 overflow-hidden bg-zinc-800">
-                <img
-                  src={h.image}
-                  alt={h.modalidade}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-              </div>
-              
-              {/* Conteúdo */}
-              <div className="p-4 sm:p-6 flex flex-col flex-grow">
-                <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">{h.icon}</div>
-                <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-red-600 mb-2 sm:mb-3">{h.time}</h3>
-                <p className="text-white font-semibold text-base sm:text-lg flex-grow">
-                  {h.modalidade}
-                </p>
-                
-                <Button 
-                  variant="default" 
-                  size="sm" 
-                  className="w-full mt-3 sm:mt-4 text-sm sm:text-base"
-                  onClick={scrollToContact}
-                >
-                  Agendar Aula
-                </Button>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+  const ScheduleSection = () => {
+    const kidsClasses = data.horarios.slice(0, 3); // Baby Class, Kids 1, Kids 2
+    const adultClasses = data.horarios.slice(3); // Adulto Iniciante, Adulto Intermediário/Avançado
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-8 lg:mt-12 p-4 sm:p-6 bg-red-600/10 border border-red-600/30 rounded-xl"
-        >
-          <p className="text-zinc-300 text-sm sm:text-base lg:text-lg">
-            <span className="text-red-600 font-bold">⏰ Segunda a Sexta:</span> Aulas conforme horários acima
-            <br className="hidden sm:block" />
-            <span className="text-red-600 font-bold">📍 Local:</span> Rua Andorinha, 164 - Sala 02, Caieiras/SP
-          </p>
-        </motion.div>
-      </div>
-    </section>
-  );
+    return (
+      <section id="horarios" className="py-12 sm:py-16 lg:py-24 bg-zinc-950">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl text-center">
+          <p className="text-red-600 font-semibold uppercase mb-2 text-sm sm:text-base">📅 Horários de Aulas</p>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-8 lg:mb-12">
+            Escolha Seu Melhor Horário
+          </h2>
+
+          {/* Aulas Infantis */}
+          <div className="mb-12 lg:mb-16">
+            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-red-600 mb-6 lg:mb-8">
+              👶 Aulas Infantis
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
+              {kidsClasses.map((h, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ y: 20, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  viewport={{ once: true, amount: 0.4 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  className="bg-zinc-900 rounded-xl overflow-hidden shadow-lg border border-zinc-800 hover:border-red-600 transition-all duration-300 group h-full flex flex-col"
+                >
+                  {/* Imagem */}
+                  <div className="h-40 sm:h-48 overflow-hidden bg-zinc-800">
+                    <img
+                      src={h.image}
+                      alt={h.modalidade}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+
+                  {/* Conteúdo */}
+                  <div className="p-4 sm:p-6 flex flex-col flex-grow">
+                    <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">{h.icon}</div>
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-red-600 mb-2 sm:mb-3">{h.time}</h3>
+                    <p className="text-white font-semibold text-base sm:text-lg flex-grow">
+                      {h.modalidade}
+                    </p>
+                    <p className="text-zinc-400 text-sm mb-3">{h.descricao}</p>
+
+                    <Button
+                      variant="default"
+                      size="sm"
+                      className="w-full mt-3 sm:mt-4 text-sm sm:text-base"
+                      onClick={scrollToContact}
+                    >
+                      Agendar Aula
+                    </Button>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Aulas Adultas */}
+          <div>
+            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-red-600 mb-6 lg:mb-8">
+              🥋 Aulas Adultos
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto">
+              {adultClasses.map((h, i) => (
+                <motion.div
+                  key={i + 3}
+                  initial={{ y: 20, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  viewport={{ once: true, amount: 0.4 }}
+                  transition={{ duration: 0.5, delay: (i + 3) * 0.1 }}
+                  className="bg-zinc-900 rounded-xl overflow-hidden shadow-lg border border-zinc-800 hover:border-red-600 transition-all duration-300 group h-full flex flex-col"
+                >
+                  {/* Imagem */}
+                  <div className="h-40 sm:h-48 overflow-hidden bg-zinc-800">
+                    <img
+                      src={h.image}
+                      alt={h.modalidade}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+
+                  {/* Conteúdo */}
+                  <div className="p-4 sm:p-6 flex flex-col flex-grow">
+                    <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">{h.icon}</div>
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-red-600 mb-2 sm:mb-3">{h.time}</h3>
+                    <p className="text-white font-semibold text-base sm:text-lg flex-grow">
+                      {h.modalidade}
+                    </p>
+                    <p className="text-zinc-400 text-sm mb-3">{h.descricao}</p>
+
+                    <Button
+                      variant="default"
+                      size="sm"
+                      className="w-full mt-3 sm:mt-4 text-sm sm:text-base"
+                      onClick={scrollToContact}
+                    >
+                      Agendar Aula
+                    </Button>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  };
 
   const PrivateLessonsSection = () => (
     <section className="py-12 sm:py-16 lg:py-24 bg-zinc-950">
@@ -763,6 +828,9 @@ export default function GalindoLandingPremium() {
   );
 
   const StoreSection = () => {
+    const roupasTreino = data.produtos.slice(0, 3); // Kimono, Camiseta, Rash Guard
+    const acessorios = data.produtos.slice(3); // Viseira, Boné, Bermuda, Bolsa
+
     return (
       <section className="py-12 sm:py-16 lg:py-20 bg-zinc-900">
         <div className="container mx-auto px-4 sm:px-6">
@@ -773,37 +841,83 @@ export default function GalindoLandingPremium() {
           <p className="text-zinc-400 text-center max-w-2xl mx-auto mb-6 lg:mb-8 text-sm sm:text-base">
             Na Galindo Store você encontra produtos oficiais: kimonos, camisetas, moletons e acessórios desenvolvidos com qualidade e identidade da nossa equipe.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto"> 
-            {data.produtos.map((produto, i) => (
-              <motion.div
-                key={produto.id}
-                initial={{ y: 20, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="bg-zinc-950 rounded-xl overflow-hidden shadow-lg hover:shadow-red-600/10 transition-shadow duration-300 border border-zinc-800"
-                whileHover={{ y: -5 }}
-              >
-                <div className="h-48 sm:h-56 overflow-hidden"> 
-                  <img
+
+          {/* Roupas de Treino */}
+          <div className="mb-12 lg:mb-16">
+            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-red-600 text-center mb-6 lg:mb-8">
+              🥋 Roupas de Treino
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto">
+              {roupasTreino.map((produto, i) => (
+                <motion.div
+                  key={produto.id}
+                  initial={{ y: 20, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  className="bg-zinc-950 rounded-3xl overflow-hidden shadow-xl hover:shadow-red-600/10 transition-shadow duration-300 border border-zinc-800"
+                  whileHover={{ y: -5 }}
+                >
+                  <div className="h-64 sm:h-72 bg-zinc-900 flex items-center justify-center overflow-hidden">
+                    <img
                       src={produto.img}
                       alt={produto.nome}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-4 sm:p-6 text-center"> 
-                  <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">{produto.nome}</h3>
-                  <p className="text-zinc-400 mb-3 text-xs sm:text-sm">{produto.desc}</p>
-                  <div className="flex justify-center pt-2">
-                      <a href={data.WHATSAPP_LINK + `?text=Quero%20comprar%20o%20produto:%20${produto.nome}`} target="_blank" rel="noreferrer">
-                          <Button size="sm" className="flex items-center gap-1 text-xs sm:text-sm">
-                              <ShoppingBag className="w-3 h-3 sm:w-4 sm:h-4" /> Comprar
-                          </Button>
-                      </a>
+                      className="max-h-full w-auto object-contain transition-transform duration-500"
+                    />
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                  <div className="p-4 sm:p-6 text-center">
+                    <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">{produto.nome}</h3>
+                    <p className="text-zinc-400 mb-3 text-xs sm:text-sm">{produto.desc}</p>
+                    <div className="flex justify-center pt-2">
+                      <a href={data.WHATSAPP_LINK + `?text=Quero%20comprar%20o%20produto:%20${produto.nome}`} target="_blank" rel="noreferrer">
+                        <Button size="sm" className="flex items-center gap-1 text-xs sm:text-sm">
+                          <ShoppingBag className="w-3 h-3 sm:w-4 sm:h-4" /> Comprar
+                        </Button>
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Acessórios */}
+          <div>
+            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-red-600 text-center mb-6 lg:mb-8">
+              🧢 Acessórios
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
+              {acessorios.map((produto, i) => (
+                <motion.div
+                  key={produto.id}
+                  initial={{ y: 20, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.5, delay: (i + 3) * 0.1 }}
+                  className="bg-zinc-950 rounded-3xl overflow-hidden shadow-xl hover:shadow-red-600/10 transition-shadow duration-300 border border-zinc-800"
+                  whileHover={{ y: -5 }}
+                >
+                  <div className="h-64 sm:h-72 bg-zinc-900 flex items-center justify-center overflow-hidden">
+                    <img
+                      src={produto.img}
+                      alt={produto.nome}
+                      className="max-h-full w-auto object-contain transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="p-4 sm:p-6 text-center">
+                    <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">{produto.nome}</h3>
+                    <p className="text-zinc-400 mb-3 text-xs sm:text-sm">{produto.desc}</p>
+                    <div className="flex justify-center pt-2">
+                      <a href={data.WHATSAPP_LINK + `?text=Quero%20comprar%20o%20produto:%20${produto.nome}`} target="_blank" rel="noreferrer">
+                        <Button size="sm" className="flex items-center gap-1 text-xs sm:text-sm">
+                          <ShoppingBag className="w-3 h-3 sm:w-4 sm:h-4" /> Comprar
+                        </Button>
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -870,86 +984,140 @@ export default function GalindoLandingPremium() {
     </section>
   );
 
-  const ContactSection = () => (
-    <section ref={contactRef} id="contato" className="py-12 sm:py-16 lg:py-24 bg-zinc-950">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-        <p className="text-red-600 font-semibold uppercase text-center mb-2 text-sm sm:text-base">Localização</p>
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white text-center mb-8 lg:mb-12">
-          Entre em Contato e Agende sua Aula
-        </h2>
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-          <motion.div
-            initial={{ x: -30, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-4 sm:space-y-6 text-zinc-300 order-2 lg:order-1"
-          >
-            <div className="flex items-start">
-              <MapPin className="w-5 h-5 sm:w-6 sm:h-6 mr-3 sm:mr-4 text-red-600 flex-shrink-0 mt-1" />
-              <p className="text-sm sm:text-base lg:text-lg font-semibold">
-                Rua Andorinha, 164, Laranjeiras, Caieiras/SP
-                <br />
-                <span className="text-zinc-500 font-normal text-xs sm:text-sm">Próximo ao Ginásio Municipal.</span>
-              </p>
-            </div>
-            <div className="flex items-center">
-              <Phone className="w-5 h-5 sm:w-6 sm:h-6 mr-3 sm:mr-4 text-red-600" />
-              <p className="text-sm sm:text-base lg:text-lg font-semibold">(11) 9 6921-4329</p>
-            </div>
-            <div className="flex items-center">
-              <Mail className="w-5 h-5 sm:w-6 sm:h-6 mr-3 sm:mr-4 text-red-600" />
-              <p className="text-sm sm:text-base lg:text-lg font-semibold">equipegalindojiujitsu@yahoo.com</p>
-            </div>
-            <div className="flex flex-col space-y-3">
-              <a href="https://www.instagram.com/equipe_galindo/" target="_blank" rel="noreferrer" className="flex items-center hover:text-red-600 transition-colors">
-                <Instagram className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 text-red-600" />
-                <p className="text-sm sm:text-base lg:text-lg font-semibold">@equipe_galindo</p>
-              </a>
-              <div className="flex flex-col sm:flex-row sm:items-center text-zinc-400 gap-1 sm:gap-3">
-                <p className="text-xs sm:text-sm">Facebook: Equipe Galindo Jiu Jitsu</p>
-                <p className="text-xs sm:text-sm">YouTube: @EquipeGalindoJiuJitsu</p>
+const ContactSection = () => (
+  <section ref={contactRef} id="contato" className="py-12 sm:py-16 lg:py-24 bg-zinc-950">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+      <p className="text-red-600 font-semibold uppercase text-center mb-2 text-sm sm:text-base">Localização</p>
+      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white text-center mb-8 lg:mb-12">
+        Entre em Contato e Agende sua Aula
+      </h2>
+
+      <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-12 items-start">
+        <motion.div
+          initial={{ x: -30, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+          className="space-y-6 text-zinc-300"
+        >
+          <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950/90 p-6 shadow-2xl shadow-black/20">
+            <div className="flex items-start gap-4">
+              <div className="rounded-3xl bg-red-600/10 p-3 text-red-500">
+                <MapPin className="w-6 h-6" />
+              </div>
+              <div>
+                <p className="text-sm text-zinc-400 uppercase tracking-[0.2em] mb-2">Endereço</p>
+                <p className="text-white text-base sm:text-lg font-semibold leading-relaxed">
+                  Rua Arminda Cavalieri Dartora, 48, 2° piso, Jd. San Marino, Caieiras/SP
+                </p>
+                <p className="text-zinc-500 text-sm mt-2">CEP: 07743-420</p>
               </div>
             </div>
 
-            <div className="pt-4 sm:pt-6 space-y-3">
-              <a href={data.WHATSAPP_LINK} target="_blank" rel="noreferrer">
-                <Button className="w-full text-sm sm:text-base lg:text-lg h-11 sm:h-12">
-                  📞 Falar com Equipe Galindo
-                </Button>
-              </a>
+            <div className="grid gap-4 sm:grid-cols-2 mt-6">
+              <div className="rounded-3xl bg-zinc-900 border border-zinc-800 p-4">
+                <p className="text-zinc-400 uppercase text-[11px] tracking-[0.18em] mb-2">Telefone</p>
+                <p className="text-white font-semibold">(11) 9 6921-4329</p>
+              </div>
+              <div className="rounded-3xl bg-zinc-900 border border-zinc-800 p-4">
+                <p className="text-zinc-400 uppercase text-[11px] tracking-[0.18em] mb-2">Email</p>
+                <p className="text-white font-semibold break-words whitespace-normal">equipegalindojiujitsu@yahoo.com</p>
+              </div>
             </div>
-          </motion.div>
 
-          <motion.div
-            initial={{ x: 30, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="w-full h-64 sm:h-80 lg:h-[450px] rounded-xl overflow-hidden shadow-xl lg:shadow-2xl border border-zinc-700 order-1 lg:order-2"
-          >
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3663.295254924707!2d-46.8778401!3d-23.3644917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cf078652d87e0b%3A0x6a0c5678b668d2f0!2sRua%20Andorinha%2C%20164%20-%20Caieiras%2C%20SP!5e0!3m2!1spt-BR!2sbr!4v1700680000000!5m2!1spt-BR!2sbr"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Localização Galindo Jiu-Jitsu"
-            ></iframe>
-          </motion.div>
-        </div>
+            <div className="flex flex-col gap-3 mt-6">
+              <a
+                href="https://www.instagram.com/equipe_galindo/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-3 rounded-3xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-white transition-colors hover:border-red-600 hover:text-red-400"
+              >
+                <Instagram className="w-5 h-5 text-red-500" />
+                @equipe_galindo
+              </a>
+              <div className="rounded-3xl border border-zinc-800 bg-zinc-900 p-4 text-zinc-400">
+                <p className="text-sm sm:text-base">Facebook: Equipe Galindo Jiu Jitsu</p>
+                <p className="text-sm sm:text-base">YouTube: @EquipeGalindoJiuJitsu</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950/95 p-6 shadow-2xl shadow-black/20">
+            <p className="text-white text-lg font-semibold mb-3">Aula Experimental</p>
+            <p className="text-zinc-300 text-sm sm:text-base leading-relaxed">
+              Venha conhecer nossa estrutura, equipe e metodologia em uma aula gratuita. O melhor momento para começar é hoje.
+            </p>
+            <div className="mt-6">
+              <Button size="lg" className="w-full" onClick={scrollToContact}>
+                📞 Agende sua aula agora
+              </Button>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ x: 30, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="rounded-[2rem] border border-red-600/20 bg-gradient-to-br from-red-950/90 via-zinc-950 to-zinc-900 shadow-2xl shadow-red-600/15"
+        >
+          <div className="p-8 sm:p-10 text-center">
+            <p className="text-red-400 uppercase tracking-[0.3em] text-xs sm:text-sm font-semibold mb-4">Estamos te esperando</p>
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-4">Visite nossa unidade em Caieiras</h3>
+            <p className="text-zinc-300 text-sm sm:text-base leading-relaxed max-w-xl mx-auto">
+              Mais que um local de treino, um espaço de superação. Aqui você encontra estrutura moderna, professores dedicados e um ambiente acolhedor para todas as idades.
+            </p>
+
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              <div className="rounded-3xl border border-zinc-800 bg-zinc-950/95 p-4 text-left">
+                <p className="text-zinc-400 uppercase text-[11px] tracking-[0.18em] mb-2">Horário</p>
+                <p className="text-white font-semibold">Segunda a Sexta</p>
+                <p className="text-zinc-500 text-sm">17h30 às 21h30</p>
+              </div>
+              <div className="rounded-3xl border border-zinc-800 bg-zinc-950/95 p-4 text-left">
+                <p className="text-zinc-400 uppercase text-[11px] tracking-[0.18em] mb-2">Turmas</p>
+                <p className="text-white font-semibold">Kids e Adultos</p>
+                <p className="text-zinc-500 text-sm">Iniciantes, avançado e competidores</p>
+              </div>
+            </div>
+
+            <div className="mt-8">
+              <Button size="lg" className="w-full bg-red-600 hover:bg-red-700 border-red-600">
+                Entrar em contato agora
+              </Button>
+            </div>
+          </div>
+        </motion.div>
       </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 
   const Footer = () => (
-    <footer className="py-6 sm:py-8 bg-zinc-900 border-t border-zinc-800">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-zinc-500 text-xs sm:text-sm">
-        <p>
-          © {new Date().getFullYear()} Galindo Jiu-Jitsu. Todos os direitos reservados. 🥋
-        </p>
+    <footer className="bg-zinc-950 border-t border-zinc-800">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="grid gap-8 lg:grid-cols-2 items-center">
+          <div>
+            <p className="text-white text-xl sm:text-2xl font-bold">Galindo Jiu-Jitsu</p>
+            <p className="text-zinc-400 mt-3 max-w-2xl text-sm sm:text-base leading-relaxed">
+              A escola com foco em evolução, disciplina e acolhimento. Agende sua primeira aula e venha treinar com a nossa família.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row sm:justify-end gap-3">
+            <button onClick={() => scrollToSection('treinamento')} className="rounded-2xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm text-zinc-300 transition-colors hover:border-red-600 hover:text-red-400">
+              Treinamento
+            </button>
+            <button onClick={() => scrollToSection('horarios')} className="rounded-2xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm text-zinc-300 transition-colors hover:border-red-600 hover:text-red-400">
+              Horários
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-8 border-t border-zinc-800 pt-6 text-center text-zinc-500 text-xs sm:text-sm">
+          <p>© {new Date().getFullYear()} Galindo Jiu-Jitsu. Todos os direitos reservados. 🥋</p>
+        </div>
       </div>
     </footer>
   );
@@ -983,27 +1151,6 @@ export default function GalindoLandingPremium() {
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white font-sans antialiased">
-      {/* Banner de Urgência - Responsivo */}
-      <motion.div 
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="bg-red-700 text-white py-2 sm:py-3 text-center text-xs sm:text-sm font-bold tracking-wider"
-      >
-        <div className="container mx-auto px-4">
-          <p className="flex justify-center items-center gap-1 sm:gap-2">
-            <Zap className="w-3 h-3 sm:w-4 sm:h-4 animate-pulse" />
-            <span className="truncate">Matrículas Abertas!</span>
-            <span className="underline ml-1 sm:ml-2 cursor-pointer hidden xs:inline" onClick={scrollToContact}>
-              Fale conosco agora!
-            </span>
-            <span className="underline ml-1 cursor-pointer xs:hidden" onClick={scrollToContact}>
-              Contato
-            </span>
-          </p>
-        </div>
-      </motion.div>
-      
       <Navbar />
 
       <main>
