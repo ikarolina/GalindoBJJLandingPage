@@ -13,6 +13,8 @@ import treiningBabyClassImg from "./assets/imagens/baby-class.jpeg";
 import treiningKids1Img from "./assets/imagens/kids-1.jpeg";
 import treiningKids2Img from "./assets/imagens/kids-2.jpeg";
 import treiningAdultosInicianteImg from "./assets/imagens/adultos-iniciante.jpeg";
+import treiningAdultosAvancadosImg from "./assets/imagens/adultos-avancados.jpeg";
+import treiningNoGiImg from "./assets/imagens/nogi.jpeg"; // Você pode trocar depois
 import { motion } from "framer-motion";
 import { FaWhatsapp, FaFacebookF, FaYoutube } from "react-icons/fa";
 
@@ -100,7 +102,7 @@ const data = {
        ],
      faq: [
          { pergunta: "Preciso ter experiência prévia?", resposta: "Não — temos turmas específicas para iniciantes absolutos." },
-         { pergunta: "Qual a idade mínima?", resposta: "A partir de 4 anos no programa Kids." },
+         { pergunta: "Qual a idade mínima?", resposta: "A partir de 3 anos no programa Baby Class." },
          { pergunta: "O que levar para a primeira aula?", resposta: "Apenas roupa confortável (bermuda e camiseta)." },
          { pergunta: "Vocês oferecem aulas particulares?", resposta: "Sim! Oferecemos aulas particulares flexíveis." },
        ],
@@ -109,7 +111,8 @@ const data = {
         { modalidade: "Kids 1", descricao: "Desenvolvimento técnico e motor para crianças.", image: treiningKids1Img, icon: "👦", nivel: "Iniciante" },
         { modalidade: "Kids 2", descricao: "Evolução técnica com disciplina e confiança.", image: treiningKids2Img, icon: "👧", nivel: "Intermediário" },
         { modalidade: "Adulto Iniciante", descricao: "Fundamentos do Jiu-Jitsu para quem começa.", image: treiningAdultosInicianteImg, icon: "🥋", nivel: "Iniciante" },
-        { modalidade: "Adulto Avançado", descricao: "Treino intenso, sparring e preparação para competição.", image: treiningAdultosInicianteImg, icon: "🔥", nivel: "Avançado" },
+        { modalidade: "Adulto Avançado", descricao: "Treino intenso, sparring e preparação para competição.", image: treiningAdultosAvancadosImg, icon: "🔥", nivel: "Avançado" },
+        { modalidade: "No-Gi", descricao: "Jiu-Jitsu sem kimono, foco em quedas, raspagens e finalizações.", image: treiningNoGiImg, icon: "🎽", nivel: "Todos os níveis" },
      ]
    };
 
@@ -168,7 +171,6 @@ export default function GalindoLandingPremium() {
           className="flex items-center gap-3 cursor-pointer group"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          {/* Logo corrigida - sem fundo, mantendo original */}
           <div className="w-12 h-12 rounded-xl overflow-hidden shadow-xl shadow-yellow-600/20 group-hover:shadow-yellow-600/40 transition-all duration-300">
             <img 
               src={logoImg} 
@@ -214,7 +216,7 @@ export default function GalindoLandingPremium() {
         </div>
       </div>
 
-      {/* Mobile Menu - sem animação que causa flickering */}
+      {/* Mobile Menu */}
       <div
         className={cn(
           "md:hidden absolute top-full left-0 w-full bg-zinc-950/95 backdrop-blur-xl border-b border-zinc-800 transition-all duration-300",
@@ -503,7 +505,7 @@ export default function GalindoLandingPremium() {
         </p>
         
         <div className="space-y-6">
-          {/* Primeira linha - 3 cards (Baby Class, Kids 1, Kids 2) */}
+          {/* Primeira linha - 3 cards infantis */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {data.horarios.slice(0, 3).map((h, i) => (
               <motion.div
@@ -539,9 +541,9 @@ export default function GalindoLandingPremium() {
             ))}
           </div>
           
-          {/* Segunda linha - 2 cards centralizados (Adulto Iniciante, Adulto Avançado) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            {data.horarios.slice(3, 5).map((h, i) => (
+          {/* Segunda linha - 3 cards adultos (Iniciante, Avançado, No-Gi) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {data.horarios.slice(3, 6).map((h, i) => (
               <motion.div
                 key={i + 3}
                 initial={{ y: 20, opacity: 0 }}
