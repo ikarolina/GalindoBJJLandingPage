@@ -788,7 +788,7 @@ export default function GalindoLandingPremium() {
               </div>
               <div className="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
                 <p className="text-zinc-400 text-xs uppercase tracking-wider mb-1">Email</p>
-                <p className="text-white font-semibold text-sm">equipegalindojiujitsu@yahoo.com</p>
+                <p className="text-white font-semibold text-xs sm:text-sm break-all">  equipegalindojiujitsu<br className="sm:hidden" />@yahoo.com</p>
               </div>
             </div>
 
@@ -796,10 +796,10 @@ export default function GalindoLandingPremium() {
               <a href="https://www.instagram.com/equipe_galindo/" target="_blank" rel="noreferrer" className="p-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-red-600 hover:text-red-500 transition-colors">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="p-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-red-600 hover:text-red-500 transition-colors">
+              <a href="https://www.facebook.com/equipe.galindo" target="_blank" rel="noreferrer" className="p-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-red-600 hover:text-red-500 transition-colors">
                 <FaFacebookF className="w-5 h-5" />
               </a>
-              <a href="#" className="p-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-red-600 hover:text-red-500 transition-colors">
+              <a href="https://youtube.com/@equipegalindojiu-jitsu" target="_blank" rel="noreferrer" className="p-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-red-600 hover:text-red-500 transition-colors">
                 <FaYoutube className="w-5 h-5" />
               </a>
             </div>
