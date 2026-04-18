@@ -70,15 +70,16 @@ const Button = ({ children, className, variant = "default", size = "default", ..
 // Dados Estáticos
 // -----------------------------------------------------------------------------
 const data = {
-    WHATSAPP_LINK: "https://wa.me/5511969214329?text=Olá%20Galindo!%20Quero%20uma%20aula%20experimental",
+    WHATSAPP_LINK: "https://wa.me/5511969214329",
+    WHATSAPP_NUMBER: "5511969214329",
     produtos: [
-       { id: 1, nome: "Kimono Oficial", img: kimonoImg, desc: "Leve e resistente", destaque: true },
-       { id: 2, nome: "Camiseta Galindo", img: camisaImg, desc: "100% algodão" },
-       { id: 3, nome: "Rash Guard", img: rashGuardImg, desc: "Proteção UV", destaque: true },
-       { id: 4, nome: "Viseira", img: viseiradImg, desc: "Ajuste perfeito" },
-       { id: 5, nome: "Boné", img: boneImg, desc: "Estilo casual" },
-       { id: 6, nome: "Bermuda", img: bermudadImg, desc: "Alta performance" },
-       { id: 7, nome: "Bolsa", img: sacoImg, desc: "Capacidade 60L" },
+       { id: 1, nome: "Kimono Oficial", img: kimonoImg },
+       { id: 2, nome: "Camiseta Galindo", img: camisaImg },
+       { id: 3, nome: "Rash Guard", img: rashGuardImg },
+       { id: 4, nome: "Viseira", img: viseiradImg },
+       { id: 5, nome: "Boné", img: boneImg },
+       { id: 6, nome: "Bermuda", img: bermudadImg },
+       { id: 7, nome: "Bolsa", img: sacoImg },
      ],
      depoimentos: [
        { nome: "Carlos Silva", texto: "Perdi 15kg e ganhei confiança! O ambiente da Galindo é incrível para quem está começando.", idade: "32 anos" },
@@ -119,7 +120,6 @@ const data = {
 export default function GalindoLandingPremium() {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
   const contactRef = useRef(null); 
 
   const scrollToSection = (id) => {
@@ -135,6 +135,21 @@ export default function GalindoLandingPremium() {
     if (contactRef.current) {
       contactRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
+  };
+
+  // Função para agendar aula experimental (abre WhatsApp)
+  const handleScheduleTrial = () => {
+    setIsNavOpen(false);
+    const message = "Olá! Gostaria de agendar uma aula experimental gratuita na Equipe Galindo.";
+    const whatsappUrl = `https://wa.me/${data.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  // Função para comprar produto (abre WhatsApp)
+  const handleBuyProduct = (produtoNome) => {
+    const message = `Olá! Tenho interesse no produto: ${produtoNome}`;
+    const whatsappUrl = `https://wa.me/${data.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   const Navbar = () => (
@@ -153,9 +168,14 @@ export default function GalindoLandingPremium() {
           className="flex items-center gap-3 cursor-pointer group"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          {/* Logo sem fundo branco - mantendo original */}
+          {/* Logo corrigida - sem fundo, mantendo original */}
           <div className="w-12 h-12 rounded-xl overflow-hidden shadow-xl shadow-yellow-600/20 group-hover:shadow-yellow-600/40 transition-all duration-300">
-            <img src={logoImg} alt="Logo Galindo" className="h-full w-full object-cover" />
+            <img 
+              src={logoImg} 
+              alt="Logo Galindo" 
+              className="w-full h-full object-cover"
+              style={{ backgroundColor: 'transparent' }}
+            />
           </div>
           <div className="flex flex-col">
             <span className="text-lg md:text-xl font-bold text-white tracking-tight">Galindo</span>
@@ -164,30 +184,22 @@ export default function GalindoLandingPremium() {
         </motion.div>
 
         <nav className="hidden md:flex items-center gap-8">
-          {['Treinamento', 'Depoimentos', 'Horários', 'Contato'].map((item) => {
-            const sectionId = item === 'Horários' ? 'horarios' : 
-                             item === 'Treinamento' ? 'treinamento' :
-                             item === 'Depoimentos' ? 'depoimentos' : 'contato';
-            return (
-              <a
-                key={item}
-                onClick={() => scrollToSection(sectionId)}
-                className={cn(
-                  "cursor-pointer text-sm font-medium transition-colors duration-300 relative py-2",
-                  activeSection === sectionId ? "text-yellow-500" : "text-zinc-300 hover:text-white"
-                )}
-              >
-                {item}
-                {activeSection === sectionId && (
-                  <motion.span layoutId="activeSection" className="absolute bottom-0 left-0 w-full h-0.5 bg-yellow-500 rounded-full" />
-                )}
-              </a>
-            );
-          })}
+          <a onClick={() => scrollToSection("treinamento")} className="cursor-pointer text-sm font-medium text-zinc-300 hover:text-white transition-colors py-2">
+            Treinamento
+          </a>
+          <a onClick={() => scrollToSection("depoimentos")} className="cursor-pointer text-sm font-medium text-zinc-300 hover:text-white transition-colors py-2">
+            Depoimentos
+          </a>
+          <a onClick={() => scrollToSection("horarios")} className="cursor-pointer text-sm font-medium text-zinc-300 hover:text-white transition-colors py-2">
+            Horários
+          </a>
+          <a onClick={() => scrollToSection("contato")} className="cursor-pointer text-sm font-medium text-zinc-300 hover:text-white transition-colors py-2">
+            Contato
+          </a>
         </nav>
 
         <div className="flex items-center gap-3">
-          <Button size="sm" onClick={scrollToContact} className="hidden md:flex shadow-xl shadow-red-600/20">
+          <Button size="sm" onClick={handleScheduleTrial} className="hidden md:flex shadow-xl shadow-red-600/20">
             <Zap className="w-4 h-4 mr-2" />
             Aula Grátis
           </Button>
@@ -202,57 +214,39 @@ export default function GalindoLandingPremium() {
         </div>
       </div>
 
-      <motion.div
-        initial={false}
-        animate={{ opacity: isNavOpen ? 1 : 0, y: isNavOpen ? 0 : -20 }}
-        transition={{ duration: 0.2 }}
+      {/* Mobile Menu - sem animação que causa flickering */}
+      <div
         className={cn(
-          "md:hidden absolute top-full left-0 w-full bg-zinc-950/95 backdrop-blur-xl border-b border-zinc-800",
-          !isNavOpen && "pointer-events-none"
+          "md:hidden absolute top-full left-0 w-full bg-zinc-950/95 backdrop-blur-xl border-b border-zinc-800 transition-all duration-300",
+          isNavOpen ? "opacity-100 visible" : "opacity-0 invisible"
         )}
       >
         <div className="flex flex-col p-6 gap-4">
-          {['Treinamento', 'Depoimentos', 'Horários', 'Contato'].map((item) => {
-            const sectionId = item === 'Horários' ? 'horarios' : 
-                             item === 'Treinamento' ? 'treinamento' :
-                             item === 'Depoimentos' ? 'depoimentos' : 'contato';
-            return (
-              <button
-                key={item}
-                onClick={() => scrollToSection(sectionId)}
-                className="text-white text-lg font-medium py-2 hover:text-yellow-500 transition-colors text-left"
-              >
-                {item}
-              </button>
-            );
-          })}
-          <Button size="lg" onClick={scrollToContact} className="mt-4 w-full justify-center">
+          <button onClick={() => scrollToSection("treinamento")} className="text-white text-lg font-medium py-2 hover:text-yellow-500 transition-colors text-left">
+            Treinamento
+          </button>
+          <button onClick={() => scrollToSection("depoimentos")} className="text-white text-lg font-medium py-2 hover:text-yellow-500 transition-colors text-left">
+            Depoimentos
+          </button>
+          <button onClick={() => scrollToSection("horarios")} className="text-white text-lg font-medium py-2 hover:text-yellow-500 transition-colors text-left">
+            Horários
+          </button>
+          <button onClick={() => scrollToSection("contato")} className="text-white text-lg font-medium py-2 hover:text-yellow-500 transition-colors text-left">
+            Contato
+          </button>
+          <Button size="lg" onClick={handleScheduleTrial} className="mt-4 w-full justify-center">
             Agendar Aula Experimental
           </Button>
         </div>
-      </motion.div>
+      </div>
     </header>
   );
 
+  // Efeito de scroll para header
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  useEffect(() => {
-    const sections = ['treinamento', 'depoimentos', 'horarios', 'contato'];
-    const observers = [];
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { if (entry.isIntersecting) setActiveSection(id); });
-      }, { rootMargin: '-40% 0px -40% 0px' });
-      obs.observe(el);
-      observers.push(obs);
-    });
-    return () => observers.forEach(o => o.disconnect());
   }, []);
 
   const HeroSection = () => (
@@ -311,7 +305,7 @@ export default function GalindoLandingPremium() {
           transition={{ delay: 0.5 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <Button size="lg" onClick={scrollToContact} className="group">
+          <Button size="lg" onClick={handleScheduleTrial} className="group">
             Agende sua Aula Grátis
             <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
           </Button>
@@ -497,110 +491,108 @@ export default function GalindoLandingPremium() {
     </section>
   );
 
- const ScheduleSection = () => (
-  <section id="horarios" className="py-20 lg:py-28 bg-zinc-950">
-    <div className="container mx-auto px-4 max-w-6xl text-center">
-      <span className="text-red-500 font-semibold uppercase tracking-wider text-sm">Nossas Aulas</span>
-      <h2 className="text-3xl lg:text-4xl font-extrabold text-white mt-3 mb-4">
-        Escolha Sua Turma
-      </h2>
-      <p className="text-zinc-400 mb-12 max-w-2xl mx-auto">
-        Temos turmas para todas as idades e níveis. Encontre a ideal para você ou seu filho.
-      </p>
-      
-      {/* Grid alinhado - 3 em cima, 2 embaixo centralizados */}
-      <div className="space-y-6">
-        {/* Primeira linha - 3 cards (Baby Class, Kids 1, Kids 2) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {data.horarios.slice(0, 3).map((h, i) => (
-            <motion.div
-              key={i}
-              initial={{ y: 20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              className="bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800 group hover:border-red-600/30 transition-all duration-300 h-full flex flex-col"
-            >
-              <div className="relative h-48 overflow-hidden">
-                <img 
-                  src={h.image} 
-                  alt={h.modalidade} 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent"></div>
-                <div className="absolute top-3 left-3 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-xs text-white border border-white/10">
-                  {h.nivel}
+  const ScheduleSection = () => (
+    <section id="horarios" className="py-20 lg:py-28 bg-zinc-950">
+      <div className="container mx-auto px-4 max-w-6xl text-center">
+        <span className="text-red-500 font-semibold uppercase tracking-wider text-sm">Nossas Aulas</span>
+        <h2 className="text-3xl lg:text-4xl font-extrabold text-white mt-3 mb-4">
+          Escolha Sua Turma
+        </h2>
+        <p className="text-zinc-400 mb-12 max-w-2xl mx-auto">
+          Temos turmas para todas as idades e níveis. Encontre a ideal para você ou seu filho.
+        </p>
+        
+        <div className="space-y-6">
+          {/* Primeira linha - 3 cards (Baby Class, Kids 1, Kids 2) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {data.horarios.slice(0, 3).map((h, i) => (
+              <motion.div
+                key={i}
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                className="bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800 group hover:border-red-600/30 transition-all duration-300 h-full flex flex-col"
+              >
+                <div className="relative h-48 overflow-hidden">
+                  <img 
+                    src={h.image} 
+                    alt={h.modalidade} 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent"></div>
+                  <div className="absolute top-3 left-3 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-xs text-white border border-white/10">
+                    {h.nivel}
+                  </div>
                 </div>
-              </div>
-              <div className="p-6 text-left flex-1 flex flex-col">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-3xl">{h.icon}</span>
-                  <h3 className="text-white font-bold text-xl">{h.modalidade}</h3>
+                <div className="p-6 text-left flex-1 flex flex-col">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-3xl">{h.icon}</span>
+                    <h3 className="text-white font-bold text-xl">{h.modalidade}</h3>
+                  </div>
+                  <p className="text-zinc-400 text-sm mb-6 flex-1">{h.descricao}</p>
+                  <Button size="sm" className="w-full" onClick={handleScheduleTrial}>
+                    Agendar Aula
+                  </Button>
                 </div>
-                <p className="text-zinc-400 text-sm mb-6 flex-1">{h.descricao}</p>
-                <Button size="sm" className="w-full" onClick={scrollToContact}>
-                  Agendar Aula Experimental
-                </Button>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
+          
+          {/* Segunda linha - 2 cards centralizados (Adulto Iniciante, Adulto Avançado) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+            {data.horarios.slice(3, 5).map((h, i) => (
+              <motion.div
+                key={i + 3}
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: (i + 3) * 0.05 }}
+                className="bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800 group hover:border-red-600/30 transition-all duration-300 h-full flex flex-col"
+              >
+                <div className="relative h-48 overflow-hidden">
+                  <img 
+                    src={h.image} 
+                    alt={h.modalidade} 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent"></div>
+                  <div className="absolute top-3 left-3 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-xs text-white border border-white/10">
+                    {h.nivel}
+                  </div>
+                </div>
+                <div className="p-6 text-left flex-1 flex flex-col">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-3xl">{h.icon}</span>
+                    <h3 className="text-white font-bold text-xl">{h.modalidade}</h3>
+                  </div>
+                  <p className="text-zinc-400 text-sm mb-6 flex-1">{h.descricao}</p>
+                  <Button size="sm" className="w-full" onClick={handleScheduleTrial}>
+                    Agendar Aula
+                  </Button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
         
-        {/* Segunda linha - 2 cards centralizados (Adulto Iniciante, Adulto Avançado) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-          {data.horarios.slice(3, 5).map((h, i) => (
-            <motion.div
-              key={i + 3}
-              initial={{ y: 20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: (i + 3) * 0.05 }}
-              className="bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800 group hover:border-red-600/30 transition-all duration-300 h-full flex flex-col"
-            >
-              <div className="relative h-48 overflow-hidden">
-                <img 
-                  src={h.image} 
-                  alt={h.modalidade} 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent"></div>
-                <div className="absolute top-3 left-3 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-xs text-white border border-white/10">
-                  {h.nivel}
-                </div>
-              </div>
-              <div className="p-6 text-left flex-1 flex flex-col">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-3xl">{h.icon}</span>
-                  <h3 className="text-white font-bold text-xl">{h.modalidade}</h3>
-                </div>
-                <p className="text-zinc-400 text-sm mb-6 flex-1">{h.descricao}</p>
-                <Button size="sm" className="w-full" onClick={scrollToContact}>
-                  Agendar Aula Experimental
-                </Button>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-8 bg-gradient-to-r from-red-600/10 to-yellow-600/10 border border-red-600/20 rounded-2xl p-6 text-center"
+        >
+          <p className="text-white font-medium">
+            📞 Não sabe qual turma escolher?{" "}
+            <button onClick={scrollToContact} className="text-yellow-500 hover:underline font-bold">
+              Fale com a gente
+            </button>
+            {" "}e nós ajudamos você!
+          </p>
+        </motion.div>
       </div>
-      
-      {/* Card de informação adicional */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="mt-8 bg-gradient-to-r from-red-600/10 to-yellow-600/10 border border-red-600/20 rounded-2xl p-6 text-center"
-      >
-        <p className="text-white font-medium">
-          📞 Não sabe qual turma escolher?{" "}
-          <button onClick={scrollToContact} className="text-yellow-500 hover:underline font-bold">
-            Fale com a gente
-          </button>
-          {" "}e nós ajudamos você!
-        </p>
-      </motion.div>
-    </div>
-  </section>
-);
+    </section>
+  );
 
   const PrivateLessonsSection = () => (
     <section className="py-20 lg:py-28 bg-gradient-to-b from-zinc-950 to-zinc-900">
@@ -622,12 +614,12 @@ export default function GalindoLandingPremium() {
             Evolua rapidamente com atenção exclusiva do professor. Ideal para quem busca aperfeiçoamento técnico ou preparação para competições.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href={data.WHATSAPP_LINK + "?text=Quero%20saber%20mais%20sobre%20aulas%20particulares"} target="_blank" rel="noreferrer">
+            <a href={`${data.WHATSAPP_LINK}?text=${encodeURIComponent("Quero saber mais sobre aulas particulares")}`} target="_blank" rel="noreferrer">
               <Button size="lg">
                 📞 Solicitar Orçamento
               </Button>
             </a>
-            <Button size="lg" variant="outline" onClick={scrollToContact}>
+            <Button size="lg" variant="outline" onClick={handleScheduleTrial}>
               🗓️ Agendar Aula
             </Button>
           </div>
@@ -642,14 +634,13 @@ export default function GalindoLandingPremium() {
         <div className="text-center mb-12">
           <span className="text-red-500 font-semibold uppercase tracking-wider text-sm">Loja Oficial</span>
           <h2 className="text-3xl lg:text-4xl font-extrabold text-white mt-3 mb-4">
-            Equipamentos e acessórios exclusivos
+            Equipamentos e Vestuário
           </h2>
           <p className="text-zinc-400 max-w-2xl mx-auto">
             Leve o orgulho da Equipe Galindo com produtos oficiais de alta qualidade.
           </p>
         </div>
 
-        {/* Grid alinhado - 4 em cima, 3 embaixo centralizados */}
         <div className="space-y-6">
           {/* Primeira linha - 4 produtos */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
@@ -662,7 +653,7 @@ export default function GalindoLandingPremium() {
                 transition={{ delay: i * 0.05 }}
                 className="bg-zinc-950 rounded-2xl overflow-hidden border border-zinc-800 group hover:border-red-600/30 transition-all duration-300"
               >
-                <div className="aspect-square bg-gradient-to-b from-zinc-800 to-zinc-900 p-4 flex items-center justify-center">
+                <div className="aspect-square bg-gradient-to-b from-zinc-800 to-zinc-900 p-6 flex items-center justify-center">
                   <img
                     src={produto.img}
                     alt={produto.nome}
@@ -670,13 +661,14 @@ export default function GalindoLandingPremium() {
                   />
                 </div>
                 <div className="p-4 text-center">
-                  <h3 className="text-white font-semibold text-sm md:text-base">{produto.nome}</h3>
-                  <p className="text-zinc-400 text-xs mb-3">{produto.desc}</p>
-                  <a href={data.WHATSAPP_LINK + `?text=Quero%20comprar%20o%20produto:%20${produto.nome}`} target="_blank" rel="noreferrer">
-                    <Button size="sm" className="w-full text-xs">
-                      <ShoppingBag className="w-3 h-3 mr-1" /> Comprar
-                    </Button>
-                  </a>
+                  <h3 className="text-white font-semibold text-sm md:text-base mb-4">{produto.nome}</h3>
+                  <Button 
+                    size="sm" 
+                    className="w-full text-xs"
+                    onClick={() => handleBuyProduct(produto.nome)}
+                  >
+                    <ShoppingBag className="w-3 h-3 mr-1" /> Comprar
+                  </Button>
                 </div>
               </motion.div>
             ))}
@@ -693,7 +685,7 @@ export default function GalindoLandingPremium() {
                 transition={{ delay: (i + 4) * 0.05 }}
                 className="bg-zinc-950 rounded-2xl overflow-hidden border border-zinc-800 group hover:border-red-600/30 transition-all duration-300"
               >
-                <div className="aspect-square bg-gradient-to-b from-zinc-800 to-zinc-900 p-4 flex items-center justify-center">
+                <div className="aspect-square bg-gradient-to-b from-zinc-800 to-zinc-900 p-6 flex items-center justify-center">
                   <img
                     src={produto.img}
                     alt={produto.nome}
@@ -701,13 +693,14 @@ export default function GalindoLandingPremium() {
                   />
                 </div>
                 <div className="p-4 text-center">
-                  <h3 className="text-white font-semibold text-sm md:text-base">{produto.nome}</h3>
-                  <p className="text-zinc-400 text-xs mb-3">{produto.desc}</p>
-                  <a href={data.WHATSAPP_LINK + `?text=Quero%20comprar%20o%20produto:%20${produto.nome}`} target="_blank" rel="noreferrer">
-                    <Button size="sm" className="w-full text-xs">
-                      <ShoppingBag className="w-3 h-3 mr-1" /> Comprar
-                    </Button>
-                  </a>
+                  <h3 className="text-white font-semibold text-sm md:text-base mb-4">{produto.nome}</h3>
+                  <Button 
+                    size="sm" 
+                    className="w-full text-xs"
+                    onClick={() => handleBuyProduct(produto.nome)}
+                  >
+                    <ShoppingBag className="w-3 h-3 mr-1" /> Comprar
+                  </Button>
                 </div>
               </motion.div>
             ))}
@@ -727,7 +720,7 @@ export default function GalindoLandingPremium() {
             onClick={() => setIsOpen(!isOpen)}
           >
             <span className="text-white font-medium">{title}</span>
-            <ChevronDown className={cn("w-5 h-5 text-red-500 transition-transform", isOpen && "rotate-180")} />
+            <ChevronDown className={cn("w-5 h-5 text-red-500 transition-transform duration-300", isOpen && "rotate-180")} />
           </button>
           <div className={cn("px-4 pb-4 text-zinc-400 text-sm", !isOpen && 'hidden')}>
             {content}
@@ -831,7 +824,7 @@ export default function GalindoLandingPremium() {
               <Users className="w-4 h-4 text-red-500" />
               <span>Turmas Kids e Adultos • Iniciantes ao Avançado</span>
             </div>
-            <Button size="lg" className="w-full" onClick={scrollToContact}>
+            <Button size="lg" className="w-full" onClick={handleScheduleTrial}>
               Agendar Aula Experimental
             </Button>
           </motion.div>
@@ -847,7 +840,7 @@ export default function GalindoLandingPremium() {
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-xl overflow-hidden">
-                <img src={logoImg} alt="Logo Galindo" className="h-full w-full object-cover" />
+                <img src={logoImg} alt="Logo Galindo" className="w-full h-full object-cover" />
               </div>
               <div>
                 <p className="text-white font-bold text-lg">Galindo</p>
@@ -862,18 +855,10 @@ export default function GalindoLandingPremium() {
           <div>
             <h4 className="text-white font-semibold mb-4">Navegação</h4>
             <ul className="space-y-2 text-sm">
-              {['Treinamento', 'Depoimentos', 'Horários', 'Contato'].map((item) => {
-                const sectionId = item === 'Horários' ? 'horarios' : 
-                                 item === 'Treinamento' ? 'treinamento' :
-                                 item === 'Depoimentos' ? 'depoimentos' : 'contato';
-                return (
-                  <li key={item}>
-                    <button onClick={() => scrollToSection(sectionId)} className="text-zinc-400 hover:text-red-500 transition-colors">
-                      {item}
-                    </button>
-                  </li>
-                );
-              })}
+              <li><button onClick={() => scrollToSection("treinamento")} className="text-zinc-400 hover:text-red-500 transition-colors">Treinamento</button></li>
+              <li><button onClick={() => scrollToSection("depoimentos")} className="text-zinc-400 hover:text-red-500 transition-colors">Depoimentos</button></li>
+              <li><button onClick={() => scrollToSection("horarios")} className="text-zinc-400 hover:text-red-500 transition-colors">Horários</button></li>
+              <li><button onClick={() => scrollToSection("contato")} className="text-zinc-400 hover:text-red-500 transition-colors">Contato</button></li>
             </ul>
           </div>
           
