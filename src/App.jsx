@@ -796,7 +796,7 @@ export default function GalindoLandingPremium() {
               <a href="https://www.instagram.com/equipe_galindo/" target="_blank" rel="noreferrer" className="p-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-red-600 hover:text-red-500 transition-colors">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="https://www.facebook.com/equipe.galindo" target="_blank" rel="noreferrer" className="p-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-red-600 hover:text-red-500 transition-colors">
+              <a href="https://www.facebook.com/equipegalindojiujitsu?rdid=okuhkm8RZmq4lmw9&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1CZEAy4uJi%2F#" target="_blank" rel="noreferrer" className="p-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-red-600 hover:text-red-500 transition-colors">
                 <FaFacebookF className="w-5 h-5" />
               </a>
               <a href="https://youtube.com/@equipegalindojiu-jitsu" target="_blank" rel="noreferrer" className="p-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-red-600 hover:text-red-500 transition-colors">
@@ -868,8 +868,8 @@ export default function GalindoLandingPremium() {
             <h4 className="text-white font-semibold mb-4">Redes Sociais</h4>
             <ul className="space-y-2 text-sm">
               <li><a href="https://www.instagram.com/equipe_galindo/" target="_blank" rel="noreferrer" className="text-zinc-400 hover:text-red-500 transition-colors">Instagram</a></li>
-              <li><a href="#" className="text-zinc-400 hover:text-red-500 transition-colors">Facebook</a></li>
-              <li><a href="#" className="text-zinc-400 hover:text-red-500 transition-colors">YouTube</a></li>
+              <li><a href="https://www.facebook.com/equipegalindojiujitsu?rdid=okuhkm8RZmq4lmw9&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1CZEAy4uJi%2F#" target="_blank" rel="noreferrer" className="text-zinc-400 hover:text-red-500 transition-colors">Facebook</a></li>
+              <li><a href="https://youtube.com/@equipegalindojiu-jitsu" target="_blank" rel="noreferrer" className="text-zinc-400 hover:text-red-500 transition-colors">YouTube</a></li>
               <li><a href={data.WHATSAPP_LINK} target="_blank" rel="noreferrer" className="text-zinc-400 hover:text-red-500 transition-colors">WhatsApp</a></li>
             </ul>
           </div>
