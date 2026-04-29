@@ -85,7 +85,7 @@ const data = {
      ],
      depoimentos: [
        { nome: "Carlos Silva", texto: "Perdi 15kg e ganhei confiança! O ambiente da Galindo é incrível para quem está começando.", idade: "32 anos" },
-       { nome: "Ana Paula", texto: "Como mulher, me sinto muito segura e acolhida. As aulas mudaram minha vida.", idade: "28 anos" },
+       { nome: "Iara Karolina", texto: "Como mulher, me sinto muito segura e acolhida. As aulas mudaram minha vida.", idade: "25 anos" },
        { nome: "João Mendes", texto: "Do iniciante absoluto ao campeão estadual em 2 anos. Metodologia que realmente funciona!", idade: "25 anos" },
      ],
      beneficios: [
@@ -94,14 +94,14 @@ const data = {
          { title: "Autodefesa Efetiva", desc: "Técnicas práticas para situações reais de perigo.", icon: ShieldHalf },
        ],
      modalidades: [
-         { name: "Iniciação (Absoluto)", desc: "Para quem nunca pisou num tatame.", icon: "🌟" },
+         { name: "Iniciante (Faixa branca)", desc: "Para quem nunca pisou num tatame.", icon: "🌟" },
          { name: "Jiu-Jitsu Adulto", desc: "Aulas adaptadas para todos os níveis", icon: "🥋" },
-         { name: "Baby Class (3-4 anos)", desc: "Disciplina, brincadeira e desenvolvimento motor", icon: "👦" },
-         { name: "Kids (4-12 anos)", desc: "Diversão, disciplina e desenvolvimento motor", icon: "👦" },
+         { name: "Baby Class (3-5 anos)", desc: "Disciplina, diversão, brincadeira e desenvolvimento motor", icon: "👦" },
+         { name: "Kids (6-15 anos)", desc: "Disciplina e desenvolvimento motor", icon: "👦" },
          { name: "No-Gi (Sem Kimono)", desc: "Foco em pegadas e wrestling", icon: "🎽" },
        ],
      faq: [
-         { pergunta: "Preciso ter experiência prévia?", resposta: "Não — temos turmas específicas para iniciantes absolutos." },
+         { pergunta: "Preciso ter experiência prévia?", resposta: "Não, temos turmas específicas para iniciantes." },
          { pergunta: "Qual a idade mínima?", resposta: "A partir de 3 anos no programa Baby Class." },
          { pergunta: "O que levar para a primeira aula?", resposta: "Apenas roupa confortável (bermuda e camiseta)." },
          { pergunta: "Vocês oferecem aulas particulares?", resposta: "Sim! Oferecemos aulas particulares flexíveis." },
@@ -636,7 +636,7 @@ export default function GalindoLandingPremium() {
         <div className="text-center mb-12">
           <span className="text-red-500 font-semibold uppercase tracking-wider text-sm">Loja Oficial</span>
           <h2 className="text-3xl lg:text-4xl font-extrabold text-white mt-3 mb-4">
-            Equipamentos e Vestuário
+            Uniformização e Vestuário
           </h2>
           <p className="text-zinc-400 max-w-2xl mx-auto">
             Leve o orgulho da Equipe Galindo com produtos oficiais de alta qualidade.
@@ -820,7 +820,8 @@ export default function GalindoLandingPremium() {
             </p>
             <div className="flex items-center gap-3 text-sm text-zinc-400 mb-6">
               <Clock className="w-4 h-4 text-red-500" />
-              <span>Segunda a Sexta • 17h30 às 21h30</span>
+              <span>Segunda a Sexta • 06h30 às 21h30</span>
+              <span>Sábado • 09h00 às 11h00</span>
             </div>
             <div className="flex items-center gap-3 text-sm text-zinc-400 mb-8">
               <Users className="w-4 h-4 text-red-500" />
