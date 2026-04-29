@@ -94,11 +94,11 @@ const data = {
          { title: "Autodefesa Efetiva", desc: "Técnicas práticas para situações reais de perigo.", icon: ShieldHalf },
        ],
      modalidades: [
+         { name: "Iniciação (Absoluto)", desc: "Para quem nunca pisou num tatame.", icon: "🌟" },
          { name: "Jiu-Jitsu Adulto", desc: "Aulas adaptadas para todos os níveis", icon: "🥋" },
+         { name: "Baby Class (3-4 anos)", desc: "Disciplina, brincadeira e desenvolvimento motor", icon: "👦" },
          { name: "Kids (4-12 anos)", desc: "Diversão, disciplina e desenvolvimento motor", icon: "👦" },
          { name: "No-Gi (Sem Kimono)", desc: "Foco em pegadas e wrestling", icon: "🎽" },
-         { name: "Competidores", desc: "Preparação tática de alto rendimento", icon: "🏆" },
-         { name: "Iniciação (Absoluto)", desc: "Para quem nunca pisou num tatame.", icon: "🌟" },
        ],
      faq: [
          { pergunta: "Preciso ter experiência prévia?", resposta: "Não — temos turmas específicas para iniciantes absolutos." },
